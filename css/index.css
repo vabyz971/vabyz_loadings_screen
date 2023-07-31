@@ -20,7 +20,7 @@ html,
 body {
     font-family: "Quicksand", sans-serif;
     overflow: hidden;
-    background: center no-repeat url("/images/background.jpg");
+    background: center no-repeat url("../images/background.jpg");
     background-size: cover;
     user-select: none
 }
