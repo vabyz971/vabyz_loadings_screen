@@ -1,0 +1,115 @@
+
+:root{
+
+    --colorText : #fff;
+    --characterGrayscale : .6;
+    --colorLoading : #fff;
+    --colorLoadingLine : #fff;
+    --paddingBar : 1px;
+    --widthloading : 90%;
+}
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: "Quicksand", sans-serif;
+    overflow: hidden;
+    background: center no-repeat url("/images/background.jpg");
+    background-size: cover;
+    user-select: none
+}
+
+.container
+{ 
+    display: flex;
+    width: auto;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container h1{
+    color: var(--colorText);
+    text-align: center;
+    z-index: 100;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 146.023%; /* 70.091px */
+}
+
+/** CHARACTER **/
+
+.character{
+    transform: translate(410px, 90px);;
+    width: 240%;
+    filter: grayscale(var(--characterGrayscale));
+}
+.character3{
+    transform: translate(-362px, 90px);
+    filter: grayscale(var(--characterGrayscale));
+}
+.character5{
+    transform: translate(-931px, 90px);
+    width: 270%;
+    filter: grayscale(var(--characterGrayscale));
+}
+.character6{
+    transform: translate(195px, 170px);
+    width: 180%;
+    filter: grayscale(var(--characterGrayscale));
+}
+ 
+.icon_v{
+    width: 320px;
+    position: static;
+}
+
+
+/** LOADING BAR **/
+
+.loadingElement{
+    z-index: 110;
+    width: var(--widthloading);
+    transform: translate(5%, -150%);
+}
+
+.loadingElement .text{
+    color: var(--colorText);
+    margin-bottom: 10px;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.loadingElement .loading{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingElement .loading .line-box{
+    padding: var(--paddingBar);
+    width: 100%;
+    height: 2px;
+    /*border: 5px solid;*/
+    border-color: var(--colorLoading);
+    border-radius: 20px;
+    display: inline-table;
+}
+
+.loadingElement .loading .line-box .line{
+    padding: var(--paddingBar);
+    height: 1px;
+    width: 10%;
+    border-radius: 20px;
+    background-color: var(--colorLoadingLine);
+    animation: width .2s cubic-bezier(0.075, 0.82, 0.165, 1)
+}

@@ -1,0 +1,89 @@
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/index.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="scene">
+            <div class="layer" data-depth="1"><img src="/images/icon_v.png" class="icon_v"></div>
+            <div class="layer" data-depth="0.3"><img src="/images/character6.png" class="character6 character_filter">
+            </div>
+            <div class="layer" data-depth="0.7"><img src="/images/character.png" class="character character_filter">
+            </div>
+            <div class="layer" data-depth="0.5"><img src="/images/character3.png" class="character3 character_filter">
+            </div>
+            <div class="layer" data-depth="0.4"><img src="/images/character5.png" class="character5 character_filter">
+            </div>
+
+        </div>
+        <h1>HorizonGameLabs</h1>
+
+    </div>
+    <div class="loadingElement">
+        <div class="text">
+            <h1>Chargement</h1>
+            <p></p>
+        </div>
+        <div class="loading">
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+    <audio autoplay src="audio.mp3"></audio>
+
+    <script>
+        var scene = document.getElementById('scene');
+        var parallaxInstance = new Parallax(scene);
+
+        var count = 0;
+        var thisCount = 0;
+        const TITLE_LOADED = "Chargement "
+        
+        const emoji = {
+            INIT_BEFORE_MAP_LOADED: ['Map'],
+            INIT_AFTER_MAP_LOADED: ['Map.', 'Map..'],
+            INIT_SESSION: ['Session.', 'Session..', 'Session...'],
+        };
+
+        const handlers = {
+            startInitFunctionOrder(data) {
+                count = data.count;
+
+                document.querySelector('.loadingElement .text h1').innerHTML = TITLE_LOADED + emoji[data.type][data.order - 1] || '';
+            },
+
+            initFunctionInvoking(data) {
+                document.querySelector('.line').style.left = '0%';
+                document.querySelector('.line').style.width = ((data.idx / count) * 100) + '%';
+            },
+
+            startDataFileEntries(data) {
+                count = data.count;
+
+                document.querySelector('.loadingElement .text h1').innerHTML = TITLE_LOADED;
+            },
+
+            performMapLoadFunction(data) {
+                ++thisCount;
+
+                document.querySelector('.line').style.left = '0%';
+                document.querySelector('.line').style.width = ((thisCount / count) * 100) + '%';
+            },
+
+            onLogLine(data) {
+                document.querySelector('.loadingElement .text p').innerHTML = data.message + "..!";
+            }
+        };
+
+        window.addEventListener('message', function (e) {
+            (handlers[e.data.eventName] || function () { })(e.data);
+        });
+    </script>
+</body>
+
+</html>
